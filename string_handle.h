@@ -10,45 +10,47 @@
 namespace utilities {
 namespace string {
 
-//×ª»»×Ö·û´®Îª´óĞ´
+//è½¬æ¢å­—ç¬¦ä¸²ä¸ºå¤§å†™
 inline void ToUpper(std::string *s) {
   std::transform(s->begin(), s->end(), s->begin(), ::toupper);
 }
 
-//×ª»»×Ö·û´®ÎªĞ¡Ğ´
+//è½¬æ¢å­—ç¬¦ä¸²ä¸ºå°å†™
 inline void ToLower(std::string *s) {
   std::transform(s->begin(), s->end(), s->begin(), ::tolower);
 }
 
-//È¥³ıÇ°ºóµÄ¿Õ°×·û
+//å»é™¤å‰åçš„ç©ºç™½ç¬¦
 inline void Trim(std::string *s) {
   s->erase(0, s->find_first_not_of(" \t\r\n"));
   s->erase(s->find_last_not_of(" \t\r\n") + 1);
 }
 
-//ÅĞ¶ÏÊÇ·ñÒÔÖ¸¶¨×Ö·û´®¿ªÍ·
+//åˆ¤æ–­æ˜¯å¦ä»¥æŒ‡å®šå­—ç¬¦ä¸²å¼€å¤´
 inline bool StartWith(const std::string &s, const std::string &start) {
   int res = s.compare(0, start.size(), start);
   return res == 0 ? true : false;
 }
 
-//ÅĞ¶ÏÊÇ·ñÒÔÖ¸¶¨×Ö·û´®½áÊø
+//åˆ¤æ–­æ˜¯å¦ä»¥æŒ‡å®šå­—ç¬¦ä¸²ç»“æŸ
 inline bool EndWith(const std::string &s, const std::string &end) {
   int res = s.compare(s.size() - end.size(), end.size(), end);
   return res == 0 ? true : false;;
 }
 
-//ÇĞ·Ö×Ö·û´®
+//åˆ‡åˆ†å­—ç¬¦ä¸²
 void Split(const std::string &s, const std::string &sep,
-           std::vector<std::string> *v);
+           std::vector<std::string> *v) {
+   
+}
 
-//Á¬½ÓÈİÆ÷ÖĞµÄËùÓĞ×Ö·û´®
-//¿ÉÄÜĞèÒª¿¼ÂÇĞ§ÂÊÎÊÌâ
+//è¿æ¥å®¹å™¨ä¸­çš„æ‰€æœ‰å­—ç¬¦ä¸²
+//å¯èƒ½éœ€è¦è€ƒè™‘æ•ˆç‡é—®é¢˜
 inline std::string ConcatAll(const std::vector<std::string> &v) {
    return std::accumulate(v.begin(), v.end(), std::string(""));
 }
 
-//É¾³ı×Ö·û´®ÖĞËùÓĞÖ¸¶¨µÄ×Ö·û
+//åˆ é™¤å­—ç¬¦ä¸²ä¸­æ‰€æœ‰æŒ‡å®šçš„å­—ç¬¦
 inline void EraseAll(std::string *s, char c) {
   s->erase(std::remove_if(s->begin(), s->end(),
           std::bind2nd(std::equal_to<char>(), c)), s->end());
