@@ -39,9 +39,41 @@ inline bool EndWith(const std::string &s, const std::string &end) {
 }
 
 //切分字符串
+//支持同时使用多种分隔符
+//但分隔符长度只能为1位
+void SplitWithMutilSep(const std::string &s, const std::string &sep,
+                       std::vector<std::string> *v) {
+  if (!s.empty() && !sep.empty()) {
+    size_t last = 0;
+    size_t index = s.find_first_of(sep, last);
+    while (index != std::string::npos) {
+      v->push_back(s.substr(last, index - last));
+      last = index + 1;
+      index = s.find_first_of(sep, last);
+    }
+
+    if (index - last > 0) {
+      v->push_back(s.substr(last, index - last));
+    }
+  }
+}
+
+//切分字符串
 void Split(const std::string &s, const std::string &sep,
            std::vector<std::string> *v) {
-   
+  if (!s.empty() && !sep.empty()) {
+    size_t last = 0;
+    size_t index = s.find(sep, last);
+    while (index != std::string::npos) {
+      v->push_back(s.substr(last, index - last));
+      last = index + sep.size();
+      index = s.find(sep, last);
+    }
+
+    if (index - last > 0) {
+      v->push_back(s.substr(last, index - last));
+    }
+  }
 }
 
 //连接容器中的所有字符串
