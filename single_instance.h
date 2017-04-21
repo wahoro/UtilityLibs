@@ -1,0 +1,6 @@
+#ifndef LINUX_CONFMONITOR_SINGLE_INSTANCE_H_
+#define LINUX_CONFMONITOR_SINGLE_INSTANCE_H_
+
+int AlreadyRunning(const char *filename);
+
+#endif  // LINUX_CONFMONITOR_SINGLE_INSTANCE_H_
