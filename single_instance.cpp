@@ -31,7 +31,7 @@ int AlreadyRunning(const char *filename) {
   }
   if (Lockfile(fd) == -1) {
     if (errno == EACCES || errno == EAGAIN) {
-      fprintf(stderr, "file: %s already locked", filename);
+      fprintf(stderr, "file: %s already locked\n", filename);
       close(fd);
       return 1;
     }
