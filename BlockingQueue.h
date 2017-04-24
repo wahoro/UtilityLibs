@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BlockingQueue_H_
+#define BlockingQueue_H_
 
 #include <deque>
 #include <string>
@@ -58,3 +59,6 @@ private:
 	BlockingQueue(const BlockingQueue &rhs);
 	void operator=(const BlockingQueue &rhs);
 };
+
+#endif
+
