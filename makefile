@@ -26,7 +26,7 @@ OBJS=$(ALL_SRCS:%.cpp=$(OBJS_DIR)/%.o)
 DEPS=$(ALL_SRCS:%.cpp=$(DEPS_DIR)/%.d) 
         
 #---------search path
-INCDIR:=-I. -I.. -I./a
+INCDIR:=-I. -I..
 LIBDIR:=-L. -L.. 
 LIBS:=
         
@@ -49,7 +49,15 @@ $(DYNAMICS):$(OBJS)
 $(STATICS):$(OBJS)
     $(AR) -o $@ $^
         
-$(DEPS_DIR)/%.d:%.cpp
+$(DEPS_DIR)/%.d:%.$(EXTENSION)
     $(CC) -MM $(INCDIR) $(CPPFLAGS) $< | sed -e 1's,^,$(OBJS_DIR)/,' > $@
         
 sinclude $(DEPS)
+
+$(OBJS_DIR)/%.o: %.$(EXTENSION)
+        $(CC) $< -o $@ -c $(CPPFLAGS) $(INCDIR)
+
+rebuild: clean all
+
+clean:
+        rm -rf $(OBJS) $(DEPS) $(PRONAME) $(DYNAMICS) $(STATICS)
